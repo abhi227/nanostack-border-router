@@ -1,0 +1,99 @@
+{
+    "config": {
+        "heap-size": {
+             "help": "The amount of static RAM to reserve for nsdynmemlib heap",
+             "value": 100000
+        },
+        "radio-type":{
+            "help": "options are ATMEL, MCR20, SPIRIT1, S2LP",
+            "value": "S2LP"
+        },
+        "backhaul-driver": {
+            "help": "options are ETH, SLIP, EMAC, CELL",
+            "value": "CELL"
+        },
+        "mesh-mode": {
+            "help": "Mesh networking mode. Options are LOWPAN_ND, LOWPAN_WS and THREAD",
+            "value": "LOWPAN_WS"
+        },
+        "backhaul-mac-src": {
+            "help": "Where to get EUI48 address. Options are BOARD, CONFIG",
+            "value": "BOARD"
+        },
+        "backhaul-mld": {
+            "help": "Enable proxying Multicast Listener Discovery messages to backhaul network",
+            "value": "false"
+        },
+        "backhaul-mac": "{0x02, 0x00, 0x00, 0x00, 0x00, 0x01}",
+        "debug-trace": "true",
+        "backhaul-dynamic-bootstrap": true,
+        "backhaul-prefix": "\"fd00:db8:ff1::\"",
+        "backhaul-default-route": "\"::/0\"",
+        "backhaul-next-hop": "\"fe80::1\"",
+        "multicast-addr": "ff05::7",
+        "LED": "NC",
+        "SERIAL_TX": "NC",
+        "SERIAL_RX": "NC",
+        "SERIAL_CTS": "NC",
+        "SERIAL_RTS": "NC",
+        "uc-channel-function": 255,
+        "bc-channel-function": 255,
+        "regulatory-domain": 3,
+        "operating-class": 255,
+        "operating-mode": 255,
+        "uc-fixed-channel": "0xffff",
+        "bc-fixed-channel": "0xffff",
+        "network-name": "\"KarinTest\"",
+        "nanostack-ppp-support": true,
+        "certificate-header": {
+            "help": "Certificate header",
+            "value": "\"wisun_certificates.h\""
+        },
+        "root-certificate": {
+            "help": "Root certificate in PEM format (must be a null terminated c-string)",
+            "value": "WISUN_ROOT_CERTIFICATE"
+        },
+        "own-certificate": {
+            "help": "Own certificate in PEM format (must be a null terminated c-string)",
+            "value": "WISUN_SERVER_CERTIFICATE"
+        },
+        "own-certificate-key": {
+            "help": "Own certificate's key in PEM format (must be a null terminated c-string)",
+            "value": "WISUN_SERVER_KEY"
+        }
+        
+    },
+    "macros": ["MBEDTLS_USER_CONFIG_FILE=\"source/mbedtls_wisun_config.h\""],    
+    "target_overrides": {
+        "*": {
+            "target.network-default-interface-type": "CELLULAR",
+            "lwip.ipv4-enabled": false,
+            "lwip.ipv6-enabled": true,
+            "mbed-trace.enable": true,
+            "lwip.ethernet-enabled": false,
+            "ppp.ppp-enabled": true,
+            "nanostack.configuration": "ws_border_router",
+            "platform.stdio-convert-newlines": true,
+            "platform.stdio-baud-rate": 115200,
+            "platform.stdio-buffered-serial": true,
+            "cellular.debug-at": false,
+            "nsapi.default-stack": "NANOSTACK",
+            "nsapi.default-cellular-plmn": 0,
+            "nsapi.default-cellular-sim-pin": "\"1234\"",
+            "nsapi.default-cellular-apn": 0,
+            "nsapi.default-cellular-username": 0,
+            "nsapi.default-cellular-password": 0,
+            "QUECTEL_BG96.provide-default": true,
+            "TELIT_HE910.provide-default": false,
+            "mbed-mesh-api.use-malloc-for-heap": true
+        },
+        "K64F": {
+            "kinetis-emac.tx-ring-len":4,
+            "kinetis-emac.rx-ring-len":4
+        },
+        "K66F": {
+            "kinetis-emac.tx-ring-len":4,
+            "kinetis-emac.rx-ring-len":4
+        }
+    }
+}
